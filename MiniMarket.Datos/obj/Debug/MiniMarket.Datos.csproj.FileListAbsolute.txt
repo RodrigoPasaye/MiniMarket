@@ -1,0 +1,9 @@
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\bin\Debug\MiniMarket.Datos.dll
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\bin\Debug\MiniMarket.Datos.pdb
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\bin\Debug\MiniMarket.Entidades.dll
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\bin\Debug\MiniMarket.Entidades.pdb
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\obj\Debug\MiniMarket.Datos.csproj.AssemblyReference.cache
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\obj\Debug\MiniMarket.Datos.csproj.CoreCompileInputs.cache
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\obj\Debug\MiniMarket.Datos.csproj.CopyComplete
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\obj\Debug\MiniMarket.Datos.dll
+D:\CursoCSharp\MiniMarket\MiniMarket.Datos\obj\Debug\MiniMarket.Datos.pdb
