@@ -18,9 +18,11 @@ namespace MiniMarket.Presentacion {
 
     #region "Mis variables"
     int estadoGuardar = 0; //Sin Ninguna Accion
+    int idCategoria = 0;
     #endregion
 
     #region "Mis metodos"
+
     private void FormatoCategorias() {
       dgvPrincipal.Columns[0].Width = 100;
       dgvPrincipal.Columns[0].HeaderText = "ID";
@@ -50,6 +52,16 @@ namespace MiniMarket.Presentacion {
       this.btnGuardar.Visible = estado;
       this.btnRetornar.Visible = !estado;
     }
+
+    private void SeleccionaItem() {
+      if (string.IsNullOrEmpty(Convert.ToString(dgvPrincipal.CurrentRow.Cells["id_categoria"].Value))) {
+        MessageBox.Show("No se tiene información para visualizar", "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      } else {
+        this.idCategoria = Convert.ToInt32(dgvPrincipal.CurrentRow.Cells["id_categoria"].Value);
+        txtCategoria.Text = Convert.ToString(dgvPrincipal.CurrentRow.Cells["descripcion"].Value);
+      }
+    }
+
     #endregion
 
     private void Categorias_Load(object sender, EventArgs e) {
@@ -62,7 +74,7 @@ namespace MiniMarket.Presentacion {
       } else {
         string respuesta = "";
         Categorias categorias = new Categorias();
-        categorias.IdCategoria = 0;
+        categorias.IdCategoria = this.idCategoria;
         categorias.Descripcion = txtCategoria.Text.Trim();
         respuesta = CategoriasN.GuardarCategoria(estadoGuardar, categorias);
         if (respuesta == "OK") {
@@ -73,7 +85,8 @@ namespace MiniMarket.Presentacion {
           this.EstadoBotonesProcesos(false);
           this.txtCategoria.Text = "";
           txtCategoria.ReadOnly = true;
-          tbpPrincipal.SelectedIndex = 0;          
+          tbpPrincipal.SelectedIndex = 0;
+          this.idCategoria = 0;
         } else {
           MessageBox.Show(respuesta, "Aviso del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -92,6 +105,12 @@ namespace MiniMarket.Presentacion {
 
     private void btnActualizar_Click(object sender, EventArgs e) {
       estadoGuardar = 2; //Actualizar Registro
+      this.EstadoBotonesPrincipales(false);
+      this.EstadoBotonesProcesos(true);
+      this.SeleccionaItem();
+      tbpPrincipal.SelectedIndex = 1;
+      txtCategoria.ReadOnly = false;
+      txtCategoria.Focus();
     }
 
     private void btnCancelar_Click(object sender, EventArgs e) {
@@ -99,6 +118,17 @@ namespace MiniMarket.Presentacion {
       txtCategoria.Text = "";
       txtCategoria.ReadOnly = true;
       this.EstadoBotonesPrincipales(true);
+      this.EstadoBotonesProcesos(false);
+      tbpPrincipal.SelectedIndex = 0;
+    }
+
+    private void dgvPrincipal_DoubleClick(object sender, EventArgs e) {
+      this.SeleccionaItem();
+      this.EstadoBotonesProcesos(false);
+      tbpPrincipal.SelectedIndex = 1;
+    }
+
+    private void btnRetornar_Click(object sender, EventArgs e) {
       this.EstadoBotonesProcesos(false);
       tbpPrincipal.SelectedIndex = 0;
     }

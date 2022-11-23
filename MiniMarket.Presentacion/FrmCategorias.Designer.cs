@@ -82,6 +82,7 @@
       this.dgvPrincipal.RowTemplate.Height = 24;
       this.dgvPrincipal.Size = new System.Drawing.Size(610, 150);
       this.dgvPrincipal.TabIndex = 3;
+      this.dgvPrincipal.DoubleClick += new System.EventHandler(this.dgvPrincipal_DoubleClick);
       // 
       // btnBuscar
       // 
@@ -132,6 +133,7 @@
       this.btnRetornar.Text = "Retornar";
       this.btnRetornar.UseVisualStyleBackColor = true;
       this.btnRetornar.Visible = false;
+      this.btnRetornar.Click += new System.EventHandler(this.btnRetornar_Click);
       // 
       // btnGuardar
       // 
