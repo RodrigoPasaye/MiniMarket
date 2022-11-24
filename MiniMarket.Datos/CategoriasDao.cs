@@ -9,7 +9,7 @@ using MiniMarket.Entidades;
 
 namespace MiniMarket.Datos {
   public class CategoriasDao {
-    public DataTable ListadoCategorias(string id) {
+    public DataTable ListadoCategorias(string texto) {
       SqlDataReader sqlDataReader;
       DataTable dataTable = new DataTable();
       SqlConnection connection = new SqlConnection();
@@ -18,7 +18,7 @@ namespace MiniMarket.Datos {
         connection = Conexion.GetInstancia().CrearConexion();
         SqlCommand command = new SqlCommand("SP_OBTENER_CATEGORIAS", connection);
         command.CommandType = CommandType.StoredProcedure;
-        command.Parameters.Add("@texto", SqlDbType.VarChar).Value = id;
+        command.Parameters.Add("@texto", SqlDbType.VarChar).Value = texto;
         connection.Open();
         sqlDataReader = command.ExecuteReader();
         dataTable.Load(sqlDataReader);
@@ -44,6 +44,26 @@ namespace MiniMarket.Datos {
         command.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = categorias.Descripcion;
         connection.Open();
         respuesta = command.ExecuteNonQuery() == 1 ? "OK" : "Error. No se pudo registrar los datos";
+      } catch (Exception ex) {
+        respuesta = ex.Message;
+      } finally {
+        if (connection.State == ConnectionState.Open) {
+          connection.Close();
+        }
+      }
+      return respuesta;
+    }
+
+    public string EliminarCategoria(int idCategoria) {
+      string respuesta = "";
+      SqlConnection connection = new SqlConnection();
+      try {
+        connection = Conexion.GetInstancia().CrearConexion();
+        SqlCommand command = new SqlCommand("SP_ELIMINAR_CATEGORIA", connection);
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.Add("@id_categoria", SqlDbType.Int).Value = idCategoria;
+        connection.Open();
+        respuesta = command.ExecuteNonQuery() == 1 ? "OK" : "Error. No se pudo eliminar los datos";
       } catch (Exception ex) {
         respuesta = ex.Message;
       } finally {
